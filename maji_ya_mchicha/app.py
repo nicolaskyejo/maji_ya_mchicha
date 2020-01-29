@@ -1,6 +1,7 @@
-from flask import Flask, make_response
 import logging
 from logging import Formatter, FileHandler
+from flask import Flask, make_response, jsonify
+from maji_ya_mchicha import restaurants
 
 
 app = Flask(__name__)
@@ -8,11 +9,16 @@ app = Flask(__name__)
 
 @app.route('/restaurants', methods=['GET'])
 def restaurants_all():
-    return make_response('restaurants', 200)
+    """Returns all restaurants objects"""
+    restaurant_objects = restaurants.load_restaurants()
+    return jsonify(restaurant_objects)
 
 
 @app.route('/restaurants/search', methods=['GET'])
 def restaurants_search():
+    """Accepts request objects q=query, lat=latitude, and lon=longitude,
+    and returns JSON object containing restaurant matches"""
+
     return make_response('search...', 200)
 
 

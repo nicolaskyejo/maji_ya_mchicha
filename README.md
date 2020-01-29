@@ -2,6 +2,7 @@
 A REST API for someone...
 
 #### Requirements
+* Python 3.6
 * Flask
 
 #### How to Run
