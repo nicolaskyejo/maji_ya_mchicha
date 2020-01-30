@@ -27,6 +27,7 @@ def not_found_error(error):
     return make_response('Resource not found', 404)
 
 
+# for situations not handled by 404, log line number where error occured
 if not app.debug:
     file_handler = FileHandler('error.log')
     file_handler.setFormatter(

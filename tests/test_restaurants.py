@@ -18,3 +18,7 @@ def test_distance():
     within tolerance of 200 meters
     """
     assert restaurants.distance(60.186824, 24.960852, 60.171159, 24.945060) == pytest.approx(2.2, rel=2e-01)
+
+
+def test_search():
+    pass

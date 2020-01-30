@@ -4,7 +4,7 @@ from math import cos, asin, sqrt, pi
 
 def load_restaurants(file: str = '../restaurants.json') -> dict:
     """Opens a file and returns a JSON object"""
-    with open(file, 'r') as f:
+    with open(file, 'r', encoding='utf8') as f:
         return json.load(f)
 
 
