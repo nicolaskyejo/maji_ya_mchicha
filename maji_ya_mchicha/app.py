@@ -1,6 +1,6 @@
 import logging
 from logging import Formatter, FileHandler
-from flask import Flask, make_response, jsonify
+from flask import Flask, make_response, jsonify, request
 from maji_ya_mchicha import restaurants
 
 
@@ -8,22 +8,34 @@ app = Flask(__name__)
 
 
 @app.route('/restaurants', methods=['GET'])
-def restaurants_all():
-    """Returns all restaurants objects"""
+def restaurants_all() -> str:
+    """Returns all restaurants objects in JSON"""
     restaurant_objects = restaurants.load_restaurants()
     return jsonify(restaurant_objects)
 
 
 @app.route('/restaurants/search', methods=['GET'])
-def restaurants_search():
+def restaurants_search() -> str:
     """Accepts request objects q=query, lat=latitude, and lon=longitude,
-    and returns JSON object containing restaurant matches"""
+    and returns containing restaurant matches in JSON"""
+    args = request.args
+    if 'q' in args and 'lat' in args and 'lon' in args:  # check if correct params are given
+        if len(args['q']) > 0 and len(args['lat']) > 0 and len(args['lon']) > 0:  # check that
+            # params satisfy length requirements
+            try:
+                q = args['q']
+                location = [float(args['lat']), float(args['lon'])]
+            except ValueError:  # Expects Float type
+                return make_response('Malformed request', 404)
+            # restaurant_object_matches = restaurants.search(q, location)
+            # return jsonify(restaurant_object_matches)
+            return make_response('Works...', 200)
 
-    return make_response('search...', 200)
+    return make_response('Malformed request', 404)
 
 
 @app.errorhandler(404)
-def not_found_error(error):
+def not_found_error(error) -> str:
     return make_response('Resource not found', 404)
 
 

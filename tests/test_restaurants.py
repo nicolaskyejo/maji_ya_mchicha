@@ -21,4 +21,6 @@ def test_distance():
 
 
 def test_search():
+    # test that it gives a reasonable location of restaurants <= 3km
+    # test that it gives a empty json object with lat, lon from another country
     pass

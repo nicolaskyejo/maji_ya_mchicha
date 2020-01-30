@@ -1,5 +1,6 @@
 import json
 from math import cos, asin, sqrt, pi
+from typing import List
 
 
 def load_restaurants(file: str = '../restaurants.json') -> dict:
@@ -17,5 +18,5 @@ def distance(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     return 12742 * asin(sqrt(a))  # 2 * Radius of the Earth in km * asin...
 
 
-def search():
+def search(query: str, location: List[float]) -> dict:
     pass

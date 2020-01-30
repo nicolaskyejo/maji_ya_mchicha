@@ -23,3 +23,22 @@ def test_restaurants_all(client):
     response = client.get('/restaurants')
     json_data = json.loads(response.data)
     assert 'restaurants' in json_data
+
+
+def test_restaurants_search(client):
+    """Tests different scenarios when search endpoint is accessed"""
+    url = '/restaurants/search'
+    # test that None or empty parameters returns an error
+    assert b'Malformed request' in client.get(url).data
+    # test minimum length is accepted
+    assert b'Malformed request' not in client.get(url + '?q=b&lat=2&lon=1').data
+    # test that all parameters are given / if a parameter is missing, return an error
+    assert b'Malformed request' in client.get(url + '?q=pizza&lat=&lon=60').data  # lat missing
+    assert b'Malformed request' in client.get(url + '?q=pizza&lat=24&lon=').data  # lon missing
+    assert b'Malformed request' in client.get(url + '?q=&lat=24&lon=60').data  # q missing
+
+    # test that it returns valid json
+    # url = 'restaurants/search?q=vegan&lat=25.21&lon=40.11'
+    # response = client.get(url)
+    # json_data = json.loads(response.data)
+    # assert 'restaurants' in json_data
