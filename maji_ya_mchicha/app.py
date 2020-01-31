@@ -27,8 +27,8 @@ def restaurants_search() -> str:
                 location = [float(args['lat']), float(args['lon'])]
             except ValueError:  # Expects Float type
                 return make_response('Malformed request', 404)
-            # restaurant_object_matches = restaurants.search(q, location)
-            # return jsonify(restaurant_object_matches)
+            restaurant_object_matches = restaurants.search(q, location)
+            return jsonify(restaurant_object_matches)
             return make_response('Works...', 200)
 
     return make_response('Malformed request', 404)

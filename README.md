@@ -10,7 +10,7 @@ A REST API (only GET requests) for some purpose...
 * pytest (for testing)
 
 #### How to Setup
-* Install **poetry** [link](https://python-poetry.org/docs/)
+* Install **poetry** ([link](https://python-poetry.org/docs/))
 or just simply ``curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python``
 * Clone the project and setup virtual environment
 ```
@@ -38,6 +38,21 @@ PS > flask run
 #### How to run tests
 Navigate to **tests** directory
 ```
+cd tests
 pytest
+```
+
+#### Sending requests
+Requests are sent to **localhost:5000/restaurants/search**
+
+Parameters:
+* q = query string
+* lat = latitude
+* lon = longitude
+
+You can send requests using [postman](https://www.getpostman.com/), your web browser or cURL
+
+```
+curl 'http://127.0.0.1:5000/restaurants/search?q=veg&lat=24.94&lon=60.17'
 ```
 
