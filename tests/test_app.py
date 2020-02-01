@@ -1,6 +1,6 @@
 import pytest
 import json
-from maji_ya_mchicha import app
+from flask_app import app
 
 
 @pytest.fixture

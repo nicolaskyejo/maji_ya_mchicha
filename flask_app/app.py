@@ -1,7 +1,7 @@
 import logging
 from logging import Formatter, FileHandler
 from flask import Flask, make_response, jsonify, request
-from maji_ya_mchicha import restaurants
+from flask_app import restaurants
 
 
 app = Flask(__name__)
@@ -48,7 +48,6 @@ if not app.debug:
     app.logger.setLevel(logging.INFO)
     file_handler.setLevel(logging.INFO)
     app.logger.addHandler(file_handler)
-    app.logger.info('errors')
 
 
 if __name__ == '__main__':

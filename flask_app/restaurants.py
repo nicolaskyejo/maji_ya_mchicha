@@ -41,12 +41,12 @@ def search(query: str, location: List[float]) -> dict:
     """
     all_restaurants = load_restaurants()
     restaurants_matches_list = []
-    # It is a bit faster to search in dict, than a list (which is present in the data structure)
+    # It is a bit faster to search in dict than a list (which is present in the data structure)
     name_dict = {restaurant['name']: restaurant for restaurant in all_restaurants['restaurants']}
     description_dict = {restaurant['description']: restaurant for restaurant in all_restaurants['restaurants']}
     tags_dict = {', '.join(restaurant['tags']): restaurant for restaurant in all_restaurants['restaurants']}
 
-    # Checking for query matches and adding matches found
+    # Checking for query matches and adding matches found, also removing duplicates
     for name in name_dict:
         if query.lower() in name.lower():
             restaurants_matches_list.append(name_dict[name])
@@ -71,5 +71,5 @@ def search(query: str, location: List[float]) -> dict:
             restaurants_matches_list.remove(query_match)
 
     if len(restaurants_matches_list) == 0:
-        return {}  # i.e no matches
+        return {}  # i.e. no matches
     return {"restaurants": restaurants_matches_list}

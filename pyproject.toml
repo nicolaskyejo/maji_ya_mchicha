@@ -3,6 +3,9 @@ name = "maji_ya_mchicha"
 version = "0.1.0"
 description = "REST backend mockup"
 authors = ["nicolaskyejo <36485974+nicolaskyejo@users.noreply.github.com>"]
+license= "MIT"
+readme= "README.md"
+repository= "https://github.com/nicolaskyejo/maji_ya_mchicha"
 
 [tool.poetry.dependencies]
 python = "^3.6"

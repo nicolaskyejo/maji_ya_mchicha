@@ -1,6 +1,6 @@
 import pytest
-from maji_ya_mchicha import __version__
-from maji_ya_mchicha import restaurants
+from flask_app import __version__
+from flask_app import restaurants
 
 
 def test_version():
