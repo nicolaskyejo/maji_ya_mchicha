@@ -71,5 +71,5 @@ def search(query: str, location: List[float]) -> dict:
             restaurants_matches_list.remove(query_match)
 
     if len(restaurants_matches_list) == 0:
-        return {}  # i.e. no matches
+        return {"restaurants": []}  # i.e. no matches
     return {"restaurants": restaurants_matches_list}

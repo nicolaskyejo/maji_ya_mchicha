@@ -10,11 +10,14 @@ A REST API (only GET requests) for some purpose...
 * pytest (for testing)
 
 #### How to Setup
+Assumption: **python** points to **python3**
+
 ##### Method 1: Using poetry
-* Install **poetry** from ([link](https://python-poetry.org/docs/))
-or just simply ``curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python`` assuming python points to python 3 (Linux/MacOS)\
+* Install [poetry](https://python-poetry.org/docs/)
+or just simply ``curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python`` in  Linux/MacOS\
 ``(Invoke-WebRequest -Uri https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py -UseBasicParsing).Content | python`` in Windows
 * Clone the project and setup virtual environment
+* If not interested in running tests and installing additional dev tools, run instead ``poetry install --no-dev`` below
 ```
 git clone https://github.com/nicolaskyejo/maji_ya_mchicha.git
 cd maji_ya_mchicha
@@ -23,7 +26,7 @@ poetry shell
 cd flask_app
 flask run
 ```
-If not interested in running tests and installing additional dev tools, run instead ``poetry install --no-dev``
+
 
 ##### Method 2: Using virtualenv/requirements.txt
 
@@ -36,18 +39,16 @@ python -m venv backend
 ###### Linux/MacOS
 ```
 $ source backend/bin/activate
-$ pip install -r requirements.txt
+$ pip install -r requirements.txt  # requirements-dev if you want to run tests
 $ cd flask_app
-$ export FLASK_APP=app.py
 $ flask run
 ```
 
 ###### In Windows
 ```
 PS > backend\scripts\activate.ps1
-PS > pip install -r requirements.txt
+PS > pip install -r requirements.txt  # requirements-dev if you want to run tests
 PS > cd flask_app
-PS > $env:FLASK_APP= "app.py"
 PS > flask run
 ```
 

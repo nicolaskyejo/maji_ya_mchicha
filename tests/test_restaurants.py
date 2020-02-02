@@ -39,4 +39,4 @@ def test_search():
     # Implement later
     # test that it gives a empty dict with [lat, lon] from another country
     restaurants_found = restaurants.search('ramen', [39.223537, -76.897222])  # Wood elves way, MD, USA.
-    assert 'restaurants' not in restaurants_found
+    assert len(restaurants_found['restaurants']) == 0
