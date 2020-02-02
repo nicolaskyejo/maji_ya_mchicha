@@ -1,12 +1,20 @@
 import json
+import logging
 from math import cos, asin, sqrt, pi
 from typing import List
 
 
 def load_restaurants(file: str = '../restaurants.json') -> dict:
-    """Opens a file and returns a JSON object"""
+    """Opens a file and returns a JSON object. Also logs invalid blurhashes if found"""
+    logging.basicConfig(filename='invalid_blurhashes.log', level=logging.INFO, format='%(asctime)s : %(message)s')
+
     with open(file, 'r', encoding='utf8') as f:
-        return json.load(f)
+        restaurants_json = json.load(f)
+        # Checking for invalid blurhashes might slow the program down
+        for restaurant in restaurants_json['restaurants']:
+            if not blurhash_validity_checker(restaurant['blurhash']):
+                logging.info('Invalid blurhash found in "%s"', restaurant['name'])
+        return restaurants_json
 
 
 # copied and adapted from https://github.com/halcy/blurhash-python
@@ -15,9 +23,9 @@ def blurhash_validity_checker(blurhash: str) -> bool:
     if len(blurhash) < 6:
         return False
 
-    alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#$%*+,-.:;=?@[]^_{|}~"
-    alphabet_values = dict(zip(alphabet, range(len(alphabet))))
-    size_info = alphabet_values[blurhash[0]]
+    characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#$%*+,-.:;=?@[]^_{|}~"
+    characters_values = dict(zip(characters, range(len(characters))))
+    size_info = characters_values[blurhash[0]]
     size_y = int(size_info / 9) + 1
     size_x = (size_info % 9) + 1
     if len(blurhash) != 4 + 2 * size_x * size_y:

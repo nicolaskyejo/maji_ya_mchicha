@@ -14,7 +14,8 @@ Assumption: **python** points to **python3**
 
 ##### Method 1: Using poetry
 * Install [poetry](https://python-poetry.org/docs/)
-or just simply ``curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python`` in  Linux/MacOS\
+by ``curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python`` in  Linux/MacOS\
+
 ``(Invoke-WebRequest -Uri https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py -UseBasicParsing).Content | python`` in Windows
 * Clone the project and setup virtual environment
 * If not interested in running tests and installing additional dev tools, run instead ``poetry install --no-dev`` below
@@ -39,7 +40,7 @@ python -m venv backend
 ###### Linux/MacOS
 ```
 $ source backend/bin/activate
-$ pip install -r requirements.txt  # requirements-dev if you want to run tests
+$ pip install -r requirements.txt  # requirements-dev.txt if you want to run tests
 $ cd flask_app
 $ flask run
 ```
@@ -47,7 +48,7 @@ $ flask run
 ###### In Windows
 ```
 PS > backend\scripts\activate.ps1
-PS > pip install -r requirements.txt  # requirements-dev if you want to run tests
+PS > pip install -r requirements.txt  # requirements-dev.txt if you want to run tests
 PS > cd flask_app
 PS > flask run
 ```
