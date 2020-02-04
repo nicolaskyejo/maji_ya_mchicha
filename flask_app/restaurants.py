@@ -1,19 +1,27 @@
 import json
 import logging
+from logging import FileHandler, Formatter
 from math import cos, asin, sqrt, pi
 from typing import List
 
 
+blurhash_file_handler = FileHandler('invalid_blurhashes.log')
+blurhash_file_handler.setFormatter(
+    Formatter('%(asctime)s : %(message)s')
+)
+logger = logging.getLogger(__name__)
+logger.addHandler(blurhash_file_handler)
+logger.setLevel(logging.ERROR)
+
+
 def load_restaurants(file: str = '../restaurants.json') -> dict:
     """Opens a file and returns a JSON object. Also logs invalid blurhashes if found"""
-    logging.basicConfig(filename='invalid_blurhashes.log', level=logging.INFO, format='%(asctime)s : %(message)s')
-
     with open(file, 'r', encoding='utf8') as f:
         restaurants_json = json.load(f)
         # Checking for invalid blurhashes might slow the program down
         for restaurant in restaurants_json['restaurants']:
             if not blurhash_validity_checker(restaurant['blurhash']):
-                logging.info('Invalid blurhash found in "%s"', restaurant['name'])
+                logger.error('Invalid blurhash found in "%s"', restaurant['name'])
         return restaurants_json
 
 
@@ -70,14 +78,14 @@ def search(query: str, location: List[float]) -> dict:
             restaurants_matches_list.append(tags_dict[tags])
 
     # Then check the distance
+    restaurants_distance_matched = []
     for query_match in restaurants_matches_list:
-        restaurant_lat, restaurant_lon = map(float, query_match['location'])  # restaurant lat, lon are already
-        # of type Float, but it doesn't hurt to double check
+        restaurant_lon, restaurant_lat = query_match['location']
         user_lat, user_lon = location
         distance_between = distance(restaurant_lat, restaurant_lon, user_lat, user_lon)
-        if distance_between > 3:  # remove restaurant from results if true
-            restaurants_matches_list.remove(query_match)
+        if distance_between < 3:
+            restaurants_distance_matched.append(query_match)
 
-    if len(restaurants_matches_list) == 0:
+    if len(restaurants_distance_matched) == 0:
         return {"restaurants": []}  # i.e. no matches
-    return {"restaurants": restaurants_matches_list}
+    return {"restaurants": restaurants_distance_matched}

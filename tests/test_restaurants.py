@@ -32,11 +32,14 @@ def test_distance():
 def test_search():
     """Tests that the search function returns expected results"""
     # test that it gives a known restaurant at its location
-    restaurants_found = restaurants.search('falafel', [24.939, 60.171])
+    restaurants_found = restaurants.search('falafel', [60.171, 24.939])
     test_dict = {restaurant['name']: restaurant for restaurant in restaurants_found['restaurants']}
     assert "Fafa's Sokos" in test_dict
-    # test that it gives a reasonable location of restaurants <= 3km
-    # Implement later
+    # test that it gives a reasonable result of restaurants <= 3km
+    restaurants_found = restaurants.search('veg', [60.17, 24.94])
+    assert len(restaurants_found['restaurants']) >= 2
     # test that it gives a empty dict with [lat, lon] from another country
     restaurants_found = restaurants.search('ramen', [39.223537, -76.897222])  # Wood elves way, MD, USA.
+    assert len(restaurants_found['restaurants']) == 0
+    restaurants_found = restaurants.search('veg', [40, 60])
     assert len(restaurants_found['restaurants']) == 0
