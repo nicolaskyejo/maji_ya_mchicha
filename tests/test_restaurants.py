@@ -35,9 +35,17 @@ def test_search():
     restaurants_found = restaurants.search('falafel', [60.171, 24.939])
     test_dict = {restaurant['name']: restaurant for restaurant in restaurants_found['restaurants']}
     assert "Fafa's Sokos" in test_dict
+
+    # test that both "O'Learys" and "Olearys" give a result
+    restaurants_found = restaurants.search("O'Learys", [60.16799, 24.94055])
+    assert len(restaurants_found['restaurants']) == 1
+    restaurants_found = restaurants.search("OLearys", [60.16799, 24.94055])
+    assert len(restaurants_found['restaurants']) == 1
+
     # test that it gives a reasonable result of restaurants <= 3km
     restaurants_found = restaurants.search('veg', [60.17, 24.94])
     assert len(restaurants_found['restaurants']) >= 2
+
     # test that it gives a empty dict with [lat, lon] from another country
     restaurants_found = restaurants.search('ramen', [39.223537, -76.897222])  # Wood elves way, MD, USA.
     assert len(restaurants_found['restaurants']) == 0

@@ -62,12 +62,12 @@ def search(query: str, location: List[float]) -> dict:
     description_dict = {restaurant['description']: restaurant for restaurant in all_restaurants['restaurants']}
     tags_dict = {', '.join(restaurant['tags']): restaurant for restaurant in all_restaurants['restaurants']}
 
-    # Checking for query matches and adding matches found, also removing duplicates
+    # Checking for query matches and adding matches found, also skipping duplicates
     for name in name_dict:
-        if query.lower() in name.lower():
+        if query.lower() in name.lower() or query.lower() in name.lower().replace("'", ""):
             restaurants_matches_list.append(name_dict[name])
     for description in description_dict:
-        if query.lower() in description.lower():
+        if query.lower() in description.lower() or query.lower() in description.lower().replace("'", ""):
             if description_dict[description] in restaurants_matches_list:
                 continue
             restaurants_matches_list.append(description_dict[description])
@@ -86,6 +86,4 @@ def search(query: str, location: List[float]) -> dict:
         if distance_between < 3:
             restaurants_distance_matched.append(query_match)
 
-    if len(restaurants_distance_matched) == 0:
-        return {"restaurants": []}  # i.e. no matches
     return {"restaurants": restaurants_distance_matched}

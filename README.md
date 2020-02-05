@@ -1,5 +1,5 @@
 #### About
-A REST API (only GET requests) for some purpose...
+A REST API (only GET requests) for an unknown purpose...
 
 #### Requirements
 ##### Strictly required
@@ -14,10 +14,9 @@ Assumption: **python** points to **python3**
 
 ##### Method 1: Using poetry
 * Install [poetry](https://python-poetry.org/docs/)
-by ``curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python`` in  Linux/MacOS\
-
-``(Invoke-WebRequest -Uri https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py -UseBasicParsing).Content | python`` in Windows
-* Clone the project and setup virtual environment
+by ``curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python`` in Linux/MacOS
+* in Windows
+```(Invoke-WebRequest -Uri https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py -UseBasicParsing).Content | python``` 
 * If not interested in running tests and installing additional dev tools, run instead ``poetry install --no-dev`` below
 ```
 git clone https://github.com/nicolaskyejo/maji_ya_mchicha.git
