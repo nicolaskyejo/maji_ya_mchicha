@@ -2,7 +2,7 @@ import json
 import logging
 from logging import FileHandler, Formatter
 from math import cos, asin, sqrt, pi
-from typing import List
+from typing import Tuple
 
 
 blurhash_file_handler = FileHandler('invalid_blurhashes.log')
@@ -50,7 +50,7 @@ def distance(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     return 12742 * asin(sqrt(a))  # 2 * Radius of the Earth in km * asin...
 
 
-def search(query: str, location: List[float]) -> dict:
+def search(query: str, location: Tuple[float, float]) -> dict:
     """Searches for restaurants using query string in (name, description and tags) fields,
     and finds restaurants closer than 3 km (< 3 km), and finally returns a dict with matched
     restaurant objects

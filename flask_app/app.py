@@ -24,7 +24,7 @@ def restaurants_search() -> str:
             # params satisfy length requirements
             try:
                 q = args['q']
-                location = [float(args['lat']), float(args['lon'])]
+                location = (float(args['lat']), float(args['lon']))
             except ValueError:  # Expects Float type
                 return make_response('Malformed request', 404)
             restaurant_object_matches = restaurants.search(q, location)
