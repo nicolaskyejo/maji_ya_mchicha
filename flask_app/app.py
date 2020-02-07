@@ -17,7 +17,7 @@ def restaurants_all() -> str:
 @app.route('/restaurants/search', methods=['GET'])
 def restaurants_search() -> str:
     """Accepts request objects q=query, lat=latitude, and lon=longitude,
-    and returns containing restaurant matches in JSON"""
+    and returns restaurant matches in JSON"""
     args = request.args
     if 'q' in args and 'lat' in args and 'lon' in args:  # check if correct params are given
         if len(args['q']) > 0 and len(args['lat']) > 0 and len(args['lon']) > 0:  # check that

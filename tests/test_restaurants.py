@@ -42,10 +42,10 @@ def test_search():
     restaurants_found = restaurants.search("OLearys", [60.16799, 24.94055])
     assert len(restaurants_found['restaurants']) > 0
 
-    # test that both "north african" and "north-africa" give a result in tags (cuisine)
+    # test that both "north african" and "north-african" give a result in tags (cuisine)
     restaurants_found = restaurants.search("north african", [60.16799, 24.94055])
     assert len(restaurants_found['restaurants']) > 0
-    restaurants_found = restaurants.search("north-africa", [60.16799, 24.94055])
+    restaurants_found = restaurants.search("north-african", [60.16799, 24.94055])
     assert len(restaurants_found['restaurants']) > 0
 
     # test that it gives a reasonable result of restaurants <= 3km
