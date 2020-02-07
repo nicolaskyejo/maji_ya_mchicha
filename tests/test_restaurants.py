@@ -38,16 +38,22 @@ def test_search():
 
     # test that both "O'Learys" and "Olearys" give a result
     restaurants_found = restaurants.search("O'Learys", [60.16799, 24.94055])
-    assert len(restaurants_found['restaurants']) == 1
+    assert len(restaurants_found['restaurants']) > 0
     restaurants_found = restaurants.search("OLearys", [60.16799, 24.94055])
-    assert len(restaurants_found['restaurants']) == 1
+    assert len(restaurants_found['restaurants']) > 0
+
+    # test that both "north african" and "north-africa" give a result in tags (cuisine)
+    restaurants_found = restaurants.search("north african", [60.16799, 24.94055])
+    assert len(restaurants_found['restaurants']) > 0
+    restaurants_found = restaurants.search("north-africa", [60.16799, 24.94055])
+    assert len(restaurants_found['restaurants']) > 0
 
     # test that it gives a reasonable result of restaurants <= 3km
     restaurants_found = restaurants.search('veg', [60.17, 24.94])
     assert len(restaurants_found['restaurants']) >= 2
 
-    # test that it gives a empty dict with [lat, lon] from another country
+    # test that it gives a empty result with (lat, lon) from another country
     restaurants_found = restaurants.search('ramen', [39.223537, -76.897222])  # Wood elves way, MD, USA.
     assert len(restaurants_found['restaurants']) == 0
-    restaurants_found = restaurants.search('veg', [40, 60])
+    restaurants_found = restaurants.search('veg', [40, 60])  # Turkmenistan
     assert len(restaurants_found['restaurants']) == 0

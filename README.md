@@ -67,7 +67,7 @@ Parameters:
 * lat = latitude
 * lon = longitude
 
-You can send requests using [postman](https://www.getpostman.com/), your web browser or cURL
+You can send requests using [postman](https://www.getpostman.com/), your web browser, or cURL
 
 ```
 curl 'http://127.0.0.1:5000/restaurants/search?q=veg&lat=60.17&lon=24.94'

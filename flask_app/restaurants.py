@@ -72,7 +72,7 @@ def search(query: str, location: Tuple[float, float]) -> dict:
                 continue
             restaurants_matches_list.append(description_dict[description])
     for tags in tags_dict:
-        if query.lower() in tags.lower():
+        if query.lower() in tags.lower() or query.lower() in tags.lower().replace("-", " "):
             if tags_dict[tags] in restaurants_matches_list:
                 continue
             restaurants_matches_list.append(tags_dict[tags])
